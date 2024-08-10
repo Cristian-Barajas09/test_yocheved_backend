@@ -6,34 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StudentDisponibility extends Model
+class Template extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-
-    protected $table = 'students_disponibility';
-
     protected $fillable = [
-        'student_id',
-        'day',
+        'name',
+        'title',
+        'content'
     ];
 
     protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
+        'deleted_at'
     ];
-
 
     protected $casts = [
-        'day' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
 
-    public function student()
-    {
-        return $this->belongsTo(Student::class);
-    }
-
-
+    
 }

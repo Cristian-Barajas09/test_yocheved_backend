@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DisponibilityRequest extends FormRequest
+class SessionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,10 @@ class DisponibilityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required', 'string'],
+            'session_start' => 'required|date',
+            'duration' => 'required|integer',
+            'student_id' => 'required|integer',
+            'time' => 'required|string',
         ];
     }
 }

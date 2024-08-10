@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DisponibilityRequest extends FormRequest
+class ScheduleSessionsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,10 @@ class DisponibilityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required', 'string'],
+            "start_date" => "required|date",
+            "end_date" => "required|date",
+            "start_time" => "required|date_format:H:i",
+            "end_time" => "required|date_format:H:i",
         ];
     }
 }

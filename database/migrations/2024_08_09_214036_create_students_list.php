@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedule_sessions', function (Blueprint $table) {
+        Schema::create('students_list', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-
-            $table->dateTime('start_at');
-            $table->dateTime('end_at');
-
+            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('period_id')->constrained('periods');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedule_sessions');
+        Schema::dropIfExists('students_list');
     }
 };

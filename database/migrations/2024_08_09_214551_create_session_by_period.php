@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('students', function (Blueprint $table) {
-            $table->string('email')->after('name');
+        Schema::create('session_by_periods', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('period_id')->constrained('periods');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -21,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('session_by_period');
     }
 };

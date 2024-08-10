@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_students_disponibility', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId('student_id')->constrained('students')->comment('student id');
-            // day of the week
-            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])->comment('day of the week for the disponibility');
+            $table->string('name');
 
             $table->softDeletes();
-
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_students_disponibility');
+        Schema::dropIfExists('subject');
     }
 };

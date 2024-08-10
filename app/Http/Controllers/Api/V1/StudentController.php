@@ -29,11 +29,14 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
+
+
         $student = $this->studentService->create(
             $request->name,
             $request->middle_name,
             $request->last_name,
-            $request->birth_date
+            $request->birth_date,
+            $request->email
         );
         return response()->json(["data" => $student], 201);
     }
@@ -52,5 +55,25 @@ class StudentController extends Controller
 
         return response()->json(["data" => $student]);
 
+    }
+
+
+    public function saveSessionInformationFromDocx($student_id, Request $request)
+    {
+
+        $request->validate([
+            'docx' => 'required|mimes:docx'
+        ]);
+        $student = $this->studentService->find($student_id);
+
+        if (!$student) {
+            return response()->json(["message" => "Student not found"], 404);
+        }
+
+
+
+        $this->studentService->saveSessionInformationFromDocx($student, $request->file('docx'));
+
+        return response()->json(["message" => "Session information saved"], 201);
     }
 }

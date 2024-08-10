@@ -33,4 +33,16 @@ class Student extends Model
     {
         return $this->hasMany(StudentDisponibility::class);
     }
+
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    public function getFullName()
+    {
+        return "{$this->name} {$this->middle_name} {$this->last_name}";
+    }
+
+
 }

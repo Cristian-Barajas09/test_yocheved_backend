@@ -6,33 +6,25 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ScheduleSession extends Model
+class SessionByPeriod extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'session_by_periods';
+
     protected $fillable = [
-        'start',
-        'end',
-        'target',
         'session_id',
-        'is_recurring',
-        'duration',
-    ];
-
-    protected $dates = [
-        'start',
-        'end',
-    ];
-
-    protected $casts = [
-        'target' => 'integer',
-        'is_recurring' => 'boolean',
-        'duration' => 'integer',
+        'period_id'
     ];
 
     public function session()
     {
         return $this->belongsTo(Session::class);
+    }
+
+    public function period()
+    {
+        return $this->belongsTo(Period::class);
     }
 }
